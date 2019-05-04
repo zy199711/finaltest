@@ -275,12 +275,10 @@ namespace trader
 			ul.btnExit.Click += new EventHandler(btnExit_Click);
 
             OpenChartFile("C:\\Users\\zy1997\\Desktop\\testfinal\\trader\\KLine\\rb1609_d1.txt");
-            //setDataGridViewOfMarketData();
-            
-            #region 定义合约表/数据表
-            //合约/名称/交易所/合约数量乘数/最小波动/多头保证金率/空头保证金率/限价单下单最大量/最小量
-            //this.dtInstruments = new DataTable("instruments");
-            this.dtInstruments.Columns.Add("合约", string.Empty.GetType());
+			#region 定义合约表/数据表
+			//合约/名称/交易所/合约数量乘数/最小波动/多头保证金率/空头保证金率/限价单下单最大量/最小量
+			//this.dtInstruments = new DataTable("instruments");
+			this.dtInstruments.Columns.Add("合约", string.Empty.GetType());
 			this.dtInstruments.Columns.Add("名称", string.Empty.GetType());
 			this.dtInstruments.Columns.Add("交易所", string.Empty.GetType());
 			this.dtInstruments.Columns.Add("合约数量", int.MinValue.GetType());
@@ -335,9 +333,10 @@ namespace trader
 
             this.setDataGridViewOfMarketData();						//设置所有行情栏=============假死,放在ul前假死 zytest 显示行情栏
             
-            #endregion
-            // zytest 干掉了登录
-            /*this.Hide();	//登录
+			//this.setDataGridViewOfMarketData();						//设置所有行情栏=============假死,放在ul前假死
+			#endregion
+            /*zytest 干掉了登录
+			this.Hide();	//登录
             if (ul.ShowDialog() == DialogResult.OK)
 			{   
 
@@ -1825,13 +1824,13 @@ namespace trader
             foreach (string _name in (new string[] { "SHFE", "CZCE", "DCE", "CFFEX"}))
             {
 				DoubleBufferDGV dgv = (DoubleBufferDGV)this.Controls.Find("dataGridView" + _name, true).First();
-                dgv.CellToolTipTextNeeded += new DataGridViewCellToolTipTextNeededEventHandler(dgv_CellToolTipTextNeeded);
-                dgv.CellMouseClick += new DataGridViewCellMouseEventHandler(dgvMD_CellMouseClick);
-                dgv.CellMouseDoubleClick += new DataGridViewCellMouseEventHandler(dgvMD_CellMouseDoubleClick);
-                dgv.CellMouseEnter += new DataGridViewCellEventHandler(dgvMD_CellMouseEnter);
-                dgv.CellMouseLeave += new DataGridViewCellEventHandler(dgv_CellMouseLeave);
-                dgv.DataError += new DataGridViewDataErrorEventHandler(dgv_DataError);
-                dgv.ReadOnly = true;		//只读
+				dgv.CellToolTipTextNeeded += new DataGridViewCellToolTipTextNeededEventHandler(dgv_CellToolTipTextNeeded);
+				dgv.CellMouseClick += new DataGridViewCellMouseEventHandler(dgvMD_CellMouseClick);
+				dgv.CellMouseDoubleClick += new DataGridViewCellMouseEventHandler(dgvMD_CellMouseDoubleClick);
+				dgv.CellMouseEnter += new DataGridViewCellEventHandler(dgvMD_CellMouseEnter);
+				dgv.CellMouseLeave += new DataGridViewCellEventHandler(dgv_CellMouseLeave);
+				dgv.DataError += new DataGridViewDataErrorEventHandler(dgv_DataError);
+				dgv.ReadOnly = true;		//只读
 				dgv.AutoGenerateColumns = true;
 				dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;//列标题对齐
 				dgv.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;		//列标题不换行
@@ -1839,18 +1838,16 @@ namespace trader
 				dgv.DefaultCellStyle.NullValue = "-";		//空值显示
 				dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;//.AllCells;//列宽调整方式:此处会影响刷新速度
 				dgv.ScrollBars = ScrollBars.Both;
-                //DataView dv = new DataView();
-                DataView dv = new DataView(this.dtMarketData);
-                
-                if (_name == "Selected")
+
+				DataView dv = new DataView(this.dtMarketData);
+				if (_name == "Selected")
 					dv.RowFilter = "自选=true";
 				else if (_name == "Arbitrage")
 					dv.RowFilter = "套利=true";
 				else
 					dv.RowFilter = "交易所='" + _name.ToString() + "'";
-                
-               //dgv.DataSource = dv;
-			    dgv.DataMember = this.dtMarketData.TableName;
+				dgv.DataSource = dv;
+				//dgv.DataMember = this.dtMarketData.TableName;
 				dgv.Columns["买价"].DefaultCellStyle.BackColor = Color.LawnGreen;
 				dgv.Columns["卖价"].DefaultCellStyle.BackColor = Color.Orange;
 				dgv.Columns["涨停"].DefaultCellStyle.ForeColor = Color.Red;

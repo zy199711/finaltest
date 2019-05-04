@@ -39,7 +39,7 @@ namespace trader
 
         private static DBConn DBinstance;
 
-        string connetStr = "server=118.25.104.17;port=3306;user=root;password=snqwyy; database=trader;SslMode=none";
+        string connetStr = "server=127.0.0.1;port=3306;user=root;password=123456; database=trader;SslMode=none";
         public MySqlConnection sqlConnection;
         public DBConn() {
             sqlConnection = new MySqlConnection(connetStr);
